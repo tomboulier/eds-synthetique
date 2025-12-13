@@ -1,6 +1,8 @@
 # EDS Synthétique
 
 [![CI](https://github.com/tomboulier/eds-synthetique/workflows/CI/badge.svg)](https://github.com/tomboulier/eds-synthetique/actions)
+[![Ruff](https://github.com/tomboulier/eds-synthetique/workflows/Ruff/badge.svg)](https://github.com/tomboulier/eds-synthetique/actions)
+[![Pyright](https://github.com/tomboulier/eds-synthetique/workflows/Pyright/badge.svg)](https://github.com/tomboulier/eds-synthetique/actions)
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
