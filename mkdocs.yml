@@ -1,0 +1,53 @@
+site_name: EDS Synthétique
+site_description: Générateur de Système d'Information Hospitalier (SIH) synthétique français
+site_author: Thomas Boulier
+repo_url: https://github.com/USERNAME/eds-synthetique
+repo_name: USERNAME/eds-synthetique
+
+theme:
+  name: material
+  language: fr
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Passer au mode sombre
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Passer au mode clair
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+
+plugins:
+  - search:
+      lang: fr
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - admonition
+  - pymdownx.details
+  - attr_list
+  - def_list
+  - tables
+
+nav:
+  - Accueil: index.md
+  - Contexte métier: context.md
