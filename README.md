@@ -4,7 +4,7 @@
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Générateur de Système d'Information Hospitalier (SIH) synthétique français pour l'expérimentation et la formation.
+Générateur de Système d'Information Hospitalier (SIH) synthétique français en vue d'être utilisé pour simuler un entrepôt de données de santé hospitalier(EDSH). Le but est de fournir un outil pour l'expérimentation et la formation.
 
 ## 📋 Contexte et objectifs
 
