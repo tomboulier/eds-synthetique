@@ -1,7 +1,7 @@
 [project]
 name = "eds-synthetique"
 version = "0.1.0"
-description = "Générateur de Système d'Information Hospitalier (SIH) synthétique français"
+description = "Générateur de Système d'Information Hospitalier (SIH) et d'Entrepôt de Données de Santé (EDS) synthétique français"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = []
