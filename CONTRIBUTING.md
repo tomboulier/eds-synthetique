@@ -89,10 +89,6 @@ git add <fichiers-modifiés>
 git commit -m "type: description courte
 
 Explication détaillée si nécessaire.
-
-🤖 Generated with [Claude Code](https://claude.com/claude-code)
-
-Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>"
 ```
 
 ### 5. Pousser la branche
