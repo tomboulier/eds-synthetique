@@ -60,8 +60,86 @@ def test_identifiant_patient_vers_str() -> None:
     assert str(identifiant) == uuid_test
 
 
-# Tests pour l'entité Patient (à implémenter après intégration des VOs)
+# Tests pour l'entité Patient
 
-# TODO: Ajouter les tests pour la création d'un patient avec IdentifiantPatient
-# TODO: Ajouter les tests pour la validation des champs
-# TODO: Ajouter les tests pour l'immutabilité (frozen dataclass)
+
+def test_creer_patient_valide() -> None:
+    """Test de création d'un Patient avec tous les champs valides."""
+    from datetime import date
+
+    from eds_synthetique.domaine.patient import Patient, Sexe
+
+    identifiant = IdentifiantPatient.generer()
+    patient = Patient(
+        identifiant=identifiant,
+        nom="Dupont",
+        prenom="Jean",
+        date_naissance=date(1980, 5, 15),
+        sexe=Sexe.MASCULIN,
+    )
+
+    assert patient.identifiant == identifiant
+    assert patient.nom == "Dupont"
+    assert patient.prenom == "Jean"
+    assert patient.date_naissance == date(1980, 5, 15)
+    assert patient.sexe == Sexe.MASCULIN
+
+
+def test_patient_immutable() -> None:
+    """Test de l'immutabilité de l'entité Patient."""
+    from datetime import date
+
+    from eds_synthetique.domaine.patient import Patient, Sexe
+
+    patient = Patient(
+        identifiant=IdentifiantPatient.generer(),
+        nom="Dupont",
+        prenom="Jean",
+        date_naissance=date(1980, 5, 15),
+        sexe=Sexe.MASCULIN,
+    )
+
+    with pytest.raises(FrozenInstanceError):
+        patient.nom = "Martin"  # type: ignore[misc]
+
+
+def test_patient_egalite() -> None:
+    """Test que deux patients avec le même identifiant sont égaux."""
+    from datetime import date
+
+    from eds_synthetique.domaine.patient import Patient, Sexe
+
+    identifiant = IdentifiantPatient.generer()
+    patient1 = Patient(
+        identifiant=identifiant,
+        nom="Dupont",
+        prenom="Jean",
+        date_naissance=date(1980, 5, 15),
+        sexe=Sexe.MASCULIN,
+    )
+    patient2 = Patient(
+        identifiant=identifiant,
+        nom="Dupont",
+        prenom="Jean",
+        date_naissance=date(1980, 5, 15),
+        sexe=Sexe.MASCULIN,
+    )
+
+    assert patient1 == patient2
+
+
+def test_patient_sexe_valeurs() -> None:
+    """Test que tous les sexes possibles fonctionnent."""
+    from datetime import date
+
+    from eds_synthetique.domaine.patient import Patient, Sexe
+
+    for sexe in [Sexe.MASCULIN, Sexe.FEMININ, Sexe.INCONNU]:
+        patient = Patient(
+            identifiant=IdentifiantPatient.generer(),
+            nom="Dupont",
+            prenom="Jean",
+            date_naissance=date(1980, 5, 15),
+            sexe=sexe,
+        )
+        assert patient.sexe == sexe

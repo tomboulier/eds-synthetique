@@ -5,6 +5,8 @@ from dataclasses import dataclass
 from datetime import datetime, timedelta
 from enum import Enum
 
+from eds_synthetique.domaine.patient import IdentifiantPatient
+
 
 @dataclass(frozen=True)
 class IdentifiantPassage:
@@ -138,20 +140,17 @@ class Passage:
 
     Parameters
     ----------
-    identifiant : str
+    identifiant : IdentifiantPassage
         Identifiant unique du passage
-    patient_id : str
+    patient_id : IdentifiantPatient
         Référence à l'identifiant du patient
-    date_heure_debut : datetime
-        Date et heure de début du passage
-    date_heure_fin : datetime | None
-        Date et heure de fin du passage (None si passage en cours)
+    periode : Periode
+        Période du passage (début et fin)
     type_passage : TypePassage
         Type de passage (urgences, consultation, etc.)
     """
 
-    identifiant: str
-    patient_id: str
-    date_heure_debut: datetime
-    date_heure_fin: datetime | None
+    identifiant: IdentifiantPassage
+    patient_id: IdentifiantPatient
+    periode: Periode
     type_passage: TypePassage

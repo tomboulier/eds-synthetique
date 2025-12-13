@@ -152,8 +152,117 @@ def test_periode_egalite() -> None:
     assert periode1 == periode2
 
 
-# Tests pour l'entité Passage (à implémenter après intégration des VOs)
+# Tests pour l'entité Passage
 
-# TODO: Ajouter les tests pour la création d'un passage avec les VOs
-# TODO: Ajouter les tests pour la validation des champs
-# TODO: Ajouter les tests pour l'immutabilité (frozen dataclass)
+
+def test_creer_passage_valide() -> None:
+    """Test de création d'un Passage avec tous les champs valides."""
+    from eds_synthetique.domaine.passage import Passage, TypePassage
+    from eds_synthetique.domaine.patient import IdentifiantPatient
+
+    identifiant_passage = IdentifiantPassage.generer()
+    identifiant_patient = IdentifiantPatient.generer()
+    debut = datetime(2025, 1, 15, 10, 0, 0)
+    fin = datetime(2025, 1, 15, 12, 0, 0)
+    periode = Periode(debut=debut, fin=fin)
+
+    passage = Passage(
+        identifiant=identifiant_passage,
+        patient_id=identifiant_patient,
+        periode=periode,
+        type_passage=TypePassage.URGENCES,
+    )
+
+    assert passage.identifiant == identifiant_passage
+    assert passage.patient_id == identifiant_patient
+    assert passage.periode == periode
+    assert passage.type_passage == TypePassage.URGENCES
+
+
+def test_creer_passage_en_cours() -> None:
+    """Test de création d'un Passage en cours (période sans fin)."""
+    from eds_synthetique.domaine.passage import Passage, TypePassage
+    from eds_synthetique.domaine.patient import IdentifiantPatient
+
+    identifiant_passage = IdentifiantPassage.generer()
+    identifiant_patient = IdentifiantPatient.generer()
+    debut = datetime(2025, 1, 15, 10, 0, 0)
+    periode = Periode(debut=debut, fin=None)
+
+    passage = Passage(
+        identifiant=identifiant_passage,
+        patient_id=identifiant_patient,
+        periode=periode,
+        type_passage=TypePassage.HOSPITALISATION,
+    )
+
+    assert passage.periode.est_en_cours() is True
+    assert passage.periode.duree() is None
+
+
+def test_passage_immutable() -> None:
+    """Test de l'immutabilité de l'entité Passage."""
+    from eds_synthetique.domaine.passage import Passage, TypePassage
+    from eds_synthetique.domaine.patient import IdentifiantPatient
+
+    passage = Passage(
+        identifiant=IdentifiantPassage.generer(),
+        patient_id=IdentifiantPatient.generer(),
+        periode=Periode(debut=datetime.now(), fin=None),
+        type_passage=TypePassage.URGENCES,
+    )
+
+    with pytest.raises(FrozenInstanceError):
+        passage.type_passage = TypePassage.CONSULTATION  # type: ignore[misc]
+
+
+def test_passage_egalite() -> None:
+    """Test que deux passages avec le même identifiant sont égaux."""
+    from eds_synthetique.domaine.passage import Passage, TypePassage
+    from eds_synthetique.domaine.patient import IdentifiantPatient
+
+    identifiant_passage = IdentifiantPassage.generer()
+    identifiant_patient = IdentifiantPatient.generer()
+    debut = datetime(2025, 1, 15, 10, 0, 0)
+    fin = datetime(2025, 1, 15, 12, 0, 0)
+    periode = Periode(debut=debut, fin=fin)
+
+    passage1 = Passage(
+        identifiant=identifiant_passage,
+        patient_id=identifiant_patient,
+        periode=periode,
+        type_passage=TypePassage.URGENCES,
+    )
+    passage2 = Passage(
+        identifiant=identifiant_passage,
+        patient_id=identifiant_patient,
+        periode=periode,
+        type_passage=TypePassage.URGENCES,
+    )
+
+    assert passage1 == passage2
+
+
+def test_passage_types_valeurs() -> None:
+    """Test que tous les types de passage possibles fonctionnent."""
+    from eds_synthetique.domaine.passage import Passage, TypePassage
+    from eds_synthetique.domaine.patient import IdentifiantPatient
+
+    identifiant_patient = IdentifiantPatient.generer()
+    debut = datetime(2025, 1, 15, 10, 0, 0)
+    fin = datetime(2025, 1, 15, 12, 0, 0)
+    periode = Periode(debut=debut, fin=fin)
+
+    for type_passage in [
+        TypePassage.URGENCES,
+        TypePassage.CONSULTATION,
+        TypePassage.HOSPITALISATION,
+        TypePassage.AMBULATOIRE,
+    ]:
+        passage = Passage(
+            identifiant=IdentifiantPassage.generer(),
+            patient_id=identifiant_patient,
+            periode=periode,
+            type_passage=type_passage,
+        )
+        assert passage.type_passage == type_passage

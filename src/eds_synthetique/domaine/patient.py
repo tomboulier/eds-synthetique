@@ -74,7 +74,7 @@ class Patient:
 
     Parameters
     ----------
-    identifiant : str
+    identifiant : IdentifiantPatient
         Identifiant unique interne du patient
     nom : str
         Nom de famille du patient
@@ -86,7 +86,7 @@ class Patient:
         Sexe biologique du patient
     """
 
-    identifiant: str
+    identifiant: IdentifiantPatient
     nom: str
     prenom: str
     date_naissance: date
