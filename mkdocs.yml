@@ -1,8 +1,8 @@
 site_name: EDS Synthétique
 site_description: Générateur de Système d'Information Hospitalier (SIH) synthétique français
 site_author: Thomas Boulier
-repo_url: https://github.com/USERNAME/eds-synthetique
-repo_name: USERNAME/eds-synthetique
+repo_url: https://github.com/tomboulier/eds-synthetique
+repo_name: tomboulier/eds-synthetique
 
 theme:
   name: material

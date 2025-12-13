@@ -25,7 +25,7 @@ EDS Synthétique est un générateur de **Système d'Information Hospitalier (SI
 
 ```bash
 # Cloner le dépôt
-git clone https://github.com/USERNAME/eds-synthetique.git
+git clone https://github.com/tomboulier/eds-synthetique.git
 cd eds-synthetique
 
 # Installer les dépendances
@@ -92,7 +92,7 @@ Représente une interaction ponctuelle avec le SIH.
 
 ## Contribuer
 
-Les contributions sont les bienvenues ! Consultez le [README](https://github.com/USERNAME/eds-synthetique) pour plus d'informations.
+Les contributions sont les bienvenues ! Consultez le [README](https://github.com/tomboulier/eds-synthetique) pour plus d'informations.
 
 ## License
 
